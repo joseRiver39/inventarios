@@ -1,9 +1,10 @@
 package com.inventarios.Controller;
 
 import com.inventarios.Service.IProductoService;
-import com.inventarios.ServiceImpl.ProductoServiceImpl;
 import com.inventarios.modelo.Producto;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -78,8 +79,11 @@ public class ProductoController {
     }
 
     @DeleteMapping("/productos/{id}")
-    public ResponseEntity<Void> deleteProduct(@PathVariable Integer id) {
-        productoServiceImpl.deleteProducto(id);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<?> deleteProduct(@PathVariable Integer id) {
+        this.productoServiceImpl.deleteProducto(id);
+        Map<String, Boolean> respuesta = new HashMap<>();
+        respuesta.put("producto eliminado", Boolean.FALSE);
+        
+        return ResponseEntity.ok(respuesta);
     }
 }
