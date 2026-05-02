@@ -32,7 +32,8 @@ public class ProductoServiceImpl implements IProductoService {
     @Override
     public Producto BuscarProductoById(Integer idProducto) {
 
-        Producto producto = this.productoRepositorio.findById(idProducto).orElseThrow(null);
+        Producto producto = this.productoRepositorio.findById(idProducto)
+                .orElseThrow(()-> new ProductoNotFoundException("El producto con el ID: "+idProducto+" no existe"));
 
         return producto;
     }
